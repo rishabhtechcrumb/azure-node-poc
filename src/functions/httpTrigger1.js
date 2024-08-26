@@ -6,12 +6,13 @@ app.http('httpTrigger1', {
     authLevel: 'anonymous',
     handler: async (request, context) => {
         context.log(`Http function processed request for url "${request.url}"`);
+        const {url} = request.params || {};
 
         const browser = await getBrowserInstance();
         const page = await browser.newPage();
 
         // Navigate the page to a URL
-        await page.goto('https://www.amarujala.com/');
+        await page.goto(url);
 
         console.log("WENT TO PAGE ");
         
